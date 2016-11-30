@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+
+.scores-main { padding:16px; margin:0px auto;}
+.scores-wrap { padding:16px;border-radius:5px;-webkit-border-radius:5px; margin:0 auto; background-color:#fff; text-align:center;}
+.scores-wrap p { font-size:20px; font-weight:700; color:#333;}
+.scores-wrap span { color:#EF4F4F;}
+.scores-content { padding:16px; border-bottom:1px #efefef solid;}
+.scores-description {border-radius:5px;-webkit-border-radius:5px; margin:0 auto; background-color:#04BE02; text-align:center; color:#fff; padding:5px; font-size:12px;}
+.scores-scoreOption { padding-left:10px; font-size:18px; color:#ff7070; font-weight:700;}
+.scores-headimg { padding-left:16px;}
+.scores-headimg img { width:3.6em; height:3.6em; margin:0 auto;}
+.scores-nickname { font-size:13px; color:#333;}
+.scores-createTime { padding-right:16px; color:#ccc; text-align:right; height:14px; line-height:14px; margin-top:16px;}

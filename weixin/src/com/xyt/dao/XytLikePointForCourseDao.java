@@ -1,0 +1,31 @@
+package com.xyt.dao;
+
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.xxcb.util.GenericHibernateDao;
+import com.xyt.po.XytLikePointForCourse;
+
+@Transactional
+@Component("XytLikePointForCourseDao")
+public class XytLikePointForCourseDao extends GenericHibernateDao{
+	/**
+	 * 根据rid查找课程信息
+	 */
+	@SuppressWarnings("unchecked")
+	public List<XytLikePointForCourse> getLikePointByCourseRidAndUserRid(Integer courseRid, Integer userInfoRid)
+	{
+		return this.findBySql(" from XytLikePointForCourse where xytUserInfo_rid =" +userInfoRid+" and xytCourse_rid = "+ courseRid +" order by rid desc", false);
+	}
+	
+	/**
+	 * 根据rid查找课程信息
+	 */
+	@SuppressWarnings("unchecked")
+	public List<XytLikePointForCourse> getLikePointByStarIdAndUserRid(Integer starId, Integer userInfoRid)
+	{
+		return this.findBySql(" from XytLikePointForCourse where xytUserInfo_rid =" +userInfoRid+" and dxjSuperStar_id = "+ starId +" order by rid desc", false);
+	}
+}

@@ -1,0 +1,58 @@
+@charset "utf-8";
+/* CSS Document */
+.m-tabpanel-content-greennum{ background-color:#ff7070; color:#fff; font-size:10px; padding:3px 9px; border-radius:3px; margin-left:8px; vertical-align:middle;} 
+.m-tabpanel-content-circle{ background-color:#fff; color:#333; border:1px solid #04BE02; font-size:10px; padding:3px 9px; border-radius:3px; margin-left:8px; vertical-align:middle;} 
+.totalcourse-circle{  margin:0 0 0 15px;} 
+.x-classlist-content-detail { padding:16px;}
+.x-classlist-content-detail {border-top:none !important;}
+.x-classlist-content-detail-avatar { width:100%; position:relative;}
+.x-classlist-content-detail-avatar p:first-child { text-align:center; height:auto;}
+.x-classlist-content-detail-avatar img { margin:0 auto; width:100%; height:auto;}
+.x-classlist-content-detail-avatar p:last-child { text-align:center;}
+.img-circle {border-radius:50%; -webkit-border-radius:50%;}
+.x-classlist-content-detail-text { width:100%;}
+.x-classlist-content-detail-text p { margin-bottom:8px;}
+.x-classlist-content-detail-text p:last-child { margin-bottom:0;}
+.x-classlist-content-detail-text-title { font-size:17px; color:#333; font-weight:600; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.x-classlist-content-detail-text-money { font-size:24px; color:#ff7070;}
+.x-classlist-content-detail-text-name { font-size:13px; color:#999; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.x-classlist-content-detail-text-time { font-size:12px; color:#999;}
+.x-classlist-content-dataol-add { font-size:14px; color:#333; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.x-classlist-content-dataol-onLineUrl { font-size:14px; color:#999; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.x-search-requestmore { line-height:44px; text-align:center; font-size:15px; color:#777; background-color:#fff;}
+.x-classlist-content-detail-space { }
+.mycourse-panle {background:-webkit-gradient(linear,0 0,0 100%,from(#f8f8f8),to(#e6e6e6));-webkit-box-shadow: 0 1px 1px 0 #c4c4c4; color:#333; font-size:16px; font-weight:600; padding:15px 10px;}
+.coursesummary { width:60%; overflow:hidden; white-space:nowrap;text-overflow:ellipsis;-webkit-text-overflow:ellipsis; }
+
+/*无订单状态*/
+.nothing-main { padding:16px; margin:0 auto;}
+.nothing-wrap { padding:16px; border-radius:5px; -webkit-border-radius:5px; margin:0 auto; background-color:#fff; text-align:center;}
+.nothing-wrap p { height:24px; line-height:24px; font-size:16px; font-weight:700; color:#333; padding:10px 0;}
+
+.memberpic img { width:2.6em; height:2.6em; margin-right:10px;}
+
+/*课程热度*/
+.percentwrap{ padding:16px;}
+.bestmore { background-color:#ff7070;color:#fff;text-align:center;padding:2px 0;display:block;text-shadow:1px 1px 1px rgba(0,0,0,0.2);-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;background:-webkit-gradient(linear, left top, ->left bottom, from(#09f), to(#077fd0));-webkit-box-reflect:below 0 ->-webkit-gradient(linear, left top, ->left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,0.25))); height:16px; line-height:16px; font-size:12px; font-weight:normal;}
+.normalcolor {color:#fff;background:#09f;text-align:center;padding:2px 0;display:block;text-shadow:1px 1px 1px rgba(0,0,0,0.2);-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;background:-webkit-gradient(linear, left top, ->left bottom, from(#09f), to(#077fd0));-webkit-box-reflect:below 0 ->-webkit-gradient(linear, left top, ->left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,0.25))); height:16px; line-height:16px; font-size:12px; font-weight:normal;}
+#chart{width:100%;}
+#chart dt{width:100%;float:left;margin:0 20px 5px 0; padding:2px 0;display:inline;font-weight:bold; text-align:left; font-size:12px; font-weight:normal; }
+#chart dd{width:100%;border-right:0px solid #ddd;float:left;margin-bottom:5px;display:inline;}
+/*#chart dd span{color:#fff;background:#09f;text-align:center;padding:2px 0;display:block;text-shadow:1px 1px 1px rgba(0,0,0,0.2);-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;background:-webkit-gradient(linear, left top, ->left bottom, from(#09f), to(#077fd0));-webkit-box-reflect:below 0 ->-webkit-gradient(linear, left top, ->left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,0.25))); height:16px; line-height:16px; font-size:12px; font-weight:normal;}*/
+#data-one{ width:47%;}
+#data-two{width:59%;}
+#data-three{ width:26%;}
+#data-one{-webkit-animation-name:bar-one; <span class="code-comment">/* Give the bar an animation with aunique name */</span>}
+#data-two{-webkit-animation-name:bar-two; <span class="code-comment">/* Give the bar an animation with aunique name */</span>}
+#data-three{-webkit-animation-name:bar-three; <span class="code-comment">/* Give the bar an animation with aunique name */</span>}
+#data-one,#data-two,#data-three{ <span class="code-comment">/* Define animation styles for all threebars at once */</span>-webkit-animation-duration:0.5s; <span class="code-comment">/* Animation duration in seconds */</span>-webkit-animation-iteration-count:1; <span class="code-comment">/* Amount of times to loop */</span>-webkit-animation-timing-function:ease-out; <span class="code-comment">/* Ease in, out etc. */</span>}
+@-webkit-keyframes bar-one{ 0%{ <span class="code-comment">/* Define bar-one styles at 0% (0 seconds) */</span> width:0%; } 100%{ <span class="code-comment">/* Define bar-one styles at 100% (0.5 seconds) */</span> width:47%;}}
+@-webkit-keyframes bar-two{ 0%{ <span class="code-comment">/* Define bar-two styles at 0% (0 seconds) */</span>width:0%;}100%{ <span class="code-comment">/* Define bar-two styles at 100% (0.5 seconds) */</span> width:59%;}}
+@-webkit-keyframes bar-three{0%{ <span class="code-comment">/* Define bar-three styles at 0% (0 seconds) */</span> width:0%;}100%{ <span class="code-comment">/* Define bar-three styles at 100% (0.5 seconds) */</span> width:26%; }}
+
+.tourism-info { color:#333; font-weight:700;}
+.tourism-l { float:left; width:98%; overflow:hidden; text-align: left; }
+.tourism-r { float:right; width:30%; overflow:hidden; text-align:right; white-space:nowrap;}
+.bm-l { width:48%; float:left;}
+.bm-r { width:48%; float:right;}
+.clearfloat { clear:both;}

@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+
+.x-classlist-content-detail { padding:16px; display:flex;}
+.x-classlist-content-detail {border-top:none !important;}
+.x-classlist-content-detail-avatar { float:left; width:18%; position:relative;}
+.x-classlist-content-detail-avatar p:first-child { text-align:center; height:45px;}
+.x-classlist-content-detail-avatar p img { width:3.6em; position:absolute; left:0; right:0; height:3.6em; margin:0 auto;}
+.x-classlist-content-detail-avatar p:last-child { font-size:13px; color:#333; margin-top:18px; text-align:center;}
+.img-circle {border-radius:50%; -webkit-border-radius:50%;}
+.x-classlist-content-detail-text { float:left; margin-left:12px; width:75%;}
+.x-classlist-content-detail-text p { height:40px; line-height:40px; padding:0 15px;}
+.x-classlist-content-detail-text p:last-child { margin-bottom:0;}
+.x-classlist-content-detail-text-title { font-size:17px; color:#333; font-weight:600; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.x-classlist-content-detail-text-money { font-size:15px; color:#ff7070;}
+.x-classlist-content-detail-text-name { font-size:13px; color:#999; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.x-classlist-content-detail-text-time { font-size:12px; color:#999;}
+.x-classlist-content-dataol-add { font-size:14px; color:#333; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.x-classlist-content-dataol-onLineUrl { font-size:14px; color:#999; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.x-search-requestmore { line-height:44px; text-align:center; font-size:15px; color:#777; background-color:#fff;}
+.x-classlist-content-detail-space { padding:0px 15px; display: flex;}
+.totlegroup-groupfee { color:#ff7070; font-size:18px; font-weight:600; vertical-align:middle;}
+.totlegroup-coursename { font-size:18px; color:#393c3e; font-weight:600;  white-space:nowrap;}
+
+/*无组团信息*/
+.nothing-main { padding:16px; margin:0 auto;}
+.nothing-wrap { padding:16px; border-radius:5px; -webkit-border-radius:5px; margin:0 auto; background-color:#fff; text-align:center;}
+.nothing-wrap p { height:24px; line-height:24px; font-size:16px; font-weight:700; color:#333; padding:10px 0;}

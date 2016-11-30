@@ -1,0 +1,326 @@
+package com.xyt.po;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+/**
+ * 校园通课程信息
+ */
+@Entity
+@Table(name = "XytCourse")
+public class XytCourse {
+	private Integer rid; //id
+	
+	//课程名字
+	private String courseName;
+	
+	//老师
+	private XytTercherInfo teacher;
+	
+	//是否在线上课
+	private boolean isOnLineClass;
+	
+	//预订截止时间
+	private Date deadDate;
+	
+	//开始时间
+	private Date startDate;
+	
+	//结束时间
+	private Date endDate;
+	
+	//线下上课地址
+	private String offLineAddress;
+	
+	//线上上课地址
+	private String onLineUrl;
+	
+	//费用
+	private BigDecimal fee;
+	
+	//是否打折
+	private boolean isDiscount;
+	
+	//打折数
+	private Float discountNumber;
+	
+	//所有的报名人数，包含试听及购买课程
+	private Integer appliedStudentsNumber;
+	
+	//点赞数
+	private Integer likePointNumber;
+	
+	//课程简介
+	private String courseIntroduction;
+	
+	//是否可以试听
+	private boolean isListenTest;
+	
+	//咨询电话
+	private String consultTelNumber;
+	
+	//对应的按键  button1/button2/button3/button4
+	private String button;
+	
+	//付费报名人数
+	private Integer totalAppliedNumber;
+	
+	//试听人数
+	private Integer auditionNumber;
+	
+	//课程编号
+	private String courseCode;
+	
+	//课程最大人数上限
+	private Integer upperLimitNumber;
+	
+	//是否支持积分兑换
+	private boolean isPayByScore = false;
+	
+	//积分兑换所需积分
+	private Integer scoreApplied;
+	
+	//是否为大学伽旅游线路
+	private boolean isTravelRoute = false;
+
+	@Column(nullable = true)
+	public boolean isTravelRoute() {
+		return isTravelRoute;
+	}
+
+	public void setTravelRoute(boolean isTravelRoute) {
+		this.isTravelRoute = isTravelRoute;
+	}
+
+	@Id
+	@GeneratedValue(generator = "XytCourse_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "XytCourse_seq", sequenceName = "s_xytCourse")
+	public Integer getRid() {
+		return rid;
+	}
+
+	public void setRid(Integer rid) {
+		this.rid = rid;
+	}
+
+	@Column(nullable = false)
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	@JoinColumn(nullable = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	public XytTercherInfo getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(XytTercherInfo teacher) {
+		this.teacher = teacher;
+	}
+
+	@Column(nullable = false)
+	public boolean isOnLineClass() {
+		return isOnLineClass;
+	}
+
+	public void setOnLineClass(boolean isOnLineClass) {
+		this.isOnLineClass = isOnLineClass;
+	}
+
+	@Column(nullable = false)
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@Column(nullable = false)
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	@Column(nullable = true)
+	public String getOffLineAddress() {
+		return offLineAddress;
+	}
+
+	public void setOffLineAddress(String offLineAddress) {
+		this.offLineAddress = offLineAddress;
+	}
+
+	@Column(nullable = false)
+	public String getOnLineUrl() {
+		return onLineUrl;
+	}
+
+	public void setOnLineUrl(String onLineUrl) {
+		this.onLineUrl = onLineUrl;
+	}
+
+	@Column(nullable = false)
+	public BigDecimal getFee() {
+		return fee;
+	}
+
+	public void setFee(BigDecimal fee) {
+		this.fee = fee;
+	}
+
+	@Column(nullable = false)
+	public boolean isDiscount() {
+		return isDiscount;
+	}
+
+	public void setDiscount(boolean isDiscount) {
+		this.isDiscount = isDiscount;
+	}
+	
+	@Column(nullable = true)
+	public Float getDiscountNumber() {
+		return discountNumber;
+	}
+
+	public void setDiscountNumber(Float discountNumber) {
+		this.discountNumber = discountNumber;
+	}
+
+	@Column(nullable = false)
+	public Integer getAppliedStudentsNumber() {
+		return appliedStudentsNumber;
+	}
+
+	public void setAppliedStudentsNumber(Integer appliedStudentsNumber) {
+		this.appliedStudentsNumber = appliedStudentsNumber;
+	}
+
+	@Column(nullable = false)
+	public Integer getLikePointNumber() {
+		return likePointNumber;
+	}
+
+	public void setLikePointNumber(Integer likePointNumber) {
+		this.likePointNumber = likePointNumber;
+	}
+
+	@Column(nullable = false)
+	public String getCourseIntroduction() {
+		return courseIntroduction;
+	}
+
+	public void setCourseIntroduction(String courseIntroduction) {
+		this.courseIntroduction = courseIntroduction;
+	}
+
+	@Column(nullable = false)
+	public boolean isListenTest() {
+		return isListenTest;
+	}
+
+	public void setListenTest(boolean isListenTest) {
+		this.isListenTest = isListenTest;
+	}
+
+	@Column(nullable = true)
+	public String getConsultTelNumber() {
+		return consultTelNumber;
+	}
+
+	public void setConsultTelNumber(String consultTelNumber) {
+		this.consultTelNumber = consultTelNumber;
+	}
+
+	@Column(nullable = true)
+	public String getButton() {
+		return button;
+	}
+
+	public void setButton(String button) {
+		this.button = button;
+	}
+
+	@Column(nullable = true)
+	public Date getDeadDate() {
+		return deadDate;
+	}
+
+	public void setDeadDate(Date deadDate) {
+		this.deadDate = deadDate;
+	}
+
+	@Column(nullable = true)
+	public Integer getTotalAppliedNumber() {
+		return totalAppliedNumber;
+	}
+
+	public void setTotalAppliedNumber(Integer totalAppliedNumber) {
+		this.totalAppliedNumber = totalAppliedNumber;
+	}
+
+	@Column(nullable = true)
+	public Integer getAuditionNumber() {
+		return auditionNumber;
+	}
+
+	public void setAuditionNumber(Integer auditionNumber) {
+		this.auditionNumber = auditionNumber;
+	}
+
+	@Column(nullable = true)
+	public String getCourseCode() {
+		return courseCode;
+	}
+
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
+
+	@Column(nullable = true)
+	public Integer getUpperLimitNumber() {
+		return upperLimitNumber;
+	}
+
+	public void setUpperLimitNumber(Integer upperLimitNumber) {
+		this.upperLimitNumber = upperLimitNumber;
+	}
+
+	@Column(nullable = true)
+	public boolean isPayByScore() {
+		return isPayByScore;
+	}
+
+	public void setPayByScore(boolean isPayByScore) {
+		this.isPayByScore = isPayByScore;
+	}
+
+	@Column(nullable = true)
+	public Integer getScoreApplied() {
+		return scoreApplied;
+	}
+
+	public void setScoreApplied(Integer scoreApplied) {
+		this.scoreApplied = scoreApplied;
+	}
+	
+	
+}

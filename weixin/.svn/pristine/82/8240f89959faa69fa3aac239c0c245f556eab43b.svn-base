@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+.mygroup-bottomPanel { height:44px; width:100%; color:#fff; text-align:center; position:fixed; bottom:0; font-size:16px; font-weight:600; line-height:44px; background-color:#EF4F4F;}
+.mygroup-main {padding:16px;}
+.mygroup-wrap { border-radius:3px; background-color:#fff; padding:16px;}
+.mygroup-groupfee { color:#ef4f4f;}
+.mygroup-teachername { text-align:center; padding:5px 0;}
+.mygroup-teacherpic { width:100%; text-align:center;}
+.mygroup-teacherpic img { height:7.6em; width:7.6em;}
+.imgteacher { padding-top:16px; padding-left:5px; padding-right:5px; text-align:center;}
+/*无组团信息*/
+.nothing-main { padding:16px; margin:0 auto;}
+.nothing-wrap { padding:16px; border-radius:5px; -webkit-border-radius:5px; margin:0 auto; background-color:#fff; text-align:center;}
+.nothing-wrap p { height:24px; line-height:24px; font-size:16px; font-weight:700; color:#333; padding:10px 0;}

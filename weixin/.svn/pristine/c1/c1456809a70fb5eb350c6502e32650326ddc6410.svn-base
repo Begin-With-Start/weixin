@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+
+.showRegister-main{ padding:16px;}
+.showRegister-wrap { border-radius:3px; background-color:#fff; padding:16px;}
+.error-tip { color:#ff0000; font-size:14px; line-height:28px; margin-bottom:8px; margin-top:-8px;}
+.input-bottom { border-bottom:1px solid #ebebeb;}
+.input-group { position:relative;}
+.p139-input { width:100%; box-sizing:border-box; color:#999; font-size:17px; border:none; line-height:17px; padding:16px 0; -webkit-appearance:none; -webkit-tap-highlight-color:transparent; outline:0;}
+.input-captcha { position:relative;}
+.input-captcha .captcha-img { position:absolute; right:15px; top:8px; width:54px; height:32px;}

@@ -1,0 +1,187 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="/tld/c.tld" prefix="c"%>
+
+<%
+String userid = request.getParameter("userid");
+String addrip = request.getParameter("addrip");
+%>
+
+<!DOCTYPE HTML>
+<html>
+  <head>     
+    <title>我来建团</title>
+    <meta charset="utf-8">   
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+ 
+ <link rel="stylesheet" href="${basePath}pages/xytpages/weui/dist/style/weui.min.css"/>
+ <link type="text/css" rel="stylesheet" href="${basePath}pages/xytpages/weui/dist/style/common.css"/>
+ <link type="text/css" rel="stylesheet" href="${basePath}pages/xytpages/weui/dist/style/creatgroup.css"/> 
+ 
+	<script language="javascript" src="${basePath}pages/jquery.js"></script>
+<script type="text/javascript">
+var groupid;
+function creategroup(){
+	$('#loadingToast').show();
+	var userId = $("#userid").val(); 
+	var addrip = $("#addrip").val();
+	var groupName = document.getElementById('groupName').value;
+	var courseId = document.getElementById("courseId").value;
+	var expectAddress = document.getElementById('expectAddress').value;
+	var teacherId = document.getElementById("teacherId").value;
+	var expectTime = document.getElementById("expectTime").value;
+	var groupIntention = document.getElementById("groupIntention").value;
+    var totalMemberNumber = document.getElementById('totalMemberNumber').value;
+    
+    if(("" == groupName) || null == groupName)
+    {
+    	groupName = "emptyName";
+    }
+    
+    if(("" == expectAddress) || null == expectAddress)
+    {
+    	expectAddress = "emptyAddrss";
+    }
+    
+    if(("" == totalMemberNumber) || null == totalMemberNumber)
+    {
+    	totalMemberNumber = -1;
+    }
+    
+    $.post('${basePath}xyt/XytGroupOrderAction!createGroupOrder.action',{groupName:groupName,
+    courseId:courseId, expectAddress:expectAddress, teacherId:teacherId, expectTime:expectTime, 
+    groupIntention:groupIntention, totalMemberNumber:totalMemberNumber, userId:userId},function(data){
+    	$('#loadingToast').hide();
+    	if(-1 == data.groupId)
+    	{
+    		showdialog2("您已订购了该课程");
+    	}else{
+    		showdialog2("开团成功！");
+    	}
+    	groupid = data.groupId;
+    },"json");
+}
+
+function showdialog2(message)
+{
+	$('#dialogmessage').html(message);
+	$('#dialog2').show();
+}
+
+function hidedialog2()
+{
+	var userId = $("#userid").val(); 
+	var addrip = $("#addrip").val();
+	$('#dialog2').hide();
+	if(-1 != groupid)
+	{
+		window.location.href="${basePath}xyt/XytGroupOrderAction!getGroupOrderByGroupId.action?groupId=" + groupid + "&userId=" + userId;
+	}
+}
+
+</script>
+  </head>
+  <body class="g-classDetail">
+  <div class="m-nav2">
+         <h2>我来建团</h2>
+  </div>  
+  
+      <div class="creatgroup-main">
+          <div class="creatgroup-wrap">
+              <div class="creatgroup-title creatgroupPanle">团队名称</div>
+              <div class="input-group input-bottom">
+                  <input type="text" class="p139-input"  value="" id="groupName" placeholder="给你的团队取个名字吧">
+              </div>
+              <div class="creatgroup-title creatgroupPanle creatgroup-margin">课程名称</div>
+              <div class="input-group input-bottom creatgroup-select">
+                  <select id = 'courseId'>
+	  	          <c:forEach items="${listXytCourse }" var="xytCourse" varStatus="i">
+	  		      <option value ="${xytCourse.rid}">${xytCourse.courseName}</option>  
+	  	          </c:forEach>
+  	              </select>
+              </div>
+              <div class="creatgroup-title creatgroupPanle creatgroup-margin">期望地址</div>
+              <div class="input-group input-bottom">
+                  <input type="text" class="p139-input"  value="" id="expectAddress" placeholder="您希望在哪个地址上课">
+              </div>
+              <div class="creatgroup-title creatgroupPanle creatgroup-margin">期望授课老师</div>
+              <div class="input-group input-bottom creatgroup-select">
+                  <select id = 'teacherId'>
+  		          <option value ="-1">无要求</option>  
+	  	          <c:forEach items="${listXytTercherInfo }" var="xytteacher" varStatus="i">
+	  		      <option value ="${xytteacher.rid}">${xytteacher.name}</option>  
+	  	          </c:forEach>
+  	              </select>
+              </div>
+              <div class="creatgroup-title creatgroupPanle creatgroup-margin">期望上课时间</div>
+              <div class="input-group input-bottom creatgroup-select">
+                  <select id = 'expectTime'>
+  	              <option value ="-1">无要求</option>  
+ 	              <option value ="0">周一至周五中午班</option> 
+ 	              <option value ="1">周一至周五晚上班</option>
+ 	              <option value ="2">周末班</option>
+                  </select>
+              </div>
+              <div class=" creatgroup-title creatgroupPanle creatgroup-margin">组团意向</div>
+              <div class="input-group input-bottom creatgroup-select">
+                  <select id = 'groupIntention'>
+   	              <option value ="-1">不透露</option>  
+ 	              <option value ="0">纯个人</option> 
+ 	              <option value ="1">携同事及朋友组团</option>
+ 	              <option value ="2">单独组团</option>
+                  </select>
+              </div>
+              <div class="creatgroup-title creatgroupPanle creatgroup-margin">团队人数</div>
+              <div class="input-group input-bottom">
+                  <input type="text" class="p139-input"  value="" id="totalMemberNumber" placeholder="组团人数上限">
+              </div>
+              <a href="#" class="weui_btn weui_btn_warn creatgroup-margin" onclick="creategroup()">开团</a>
+             
+          </div>
+      </div>
+  
+  
+  
+ 
+<input type='hidden' id='userid' value='<%=userid%>'/>
+<input type='hidden' id='addrip' value='<%=addrip%>'/>
+<div class="weui_dialog_alert" id="dialog2" style="display: none;">
+   <div class="weui_mask"></div>
+   <div class="weui_dialog">
+      <div class="weui_dialog_hd"><strong class="weui_dialog_title">温馨提醒</strong></div>
+      <div class="weui_dialog_bd" id = "dialogmessage"></div>
+      <div class="weui_dialog_ft">
+          <a id="ok" onClick = "hidedialog2()" class="weui_btn_dialog primary">确定</a>
+      </div>
+   </div>
+</div>
+
+<div id="loadingToast" class="weui_loading_toast" style="display:none;">
+   <div class="weui_mask_transparent"></div>
+   <div class="weui_toast">
+       <div class="weui_loading">
+           <!-- :) -->
+           <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+           <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+       </div>
+       <p class="weui_toast_content">数据加载中</p>
+   </div>
+</div>
+
+  </body>
+  
+</html>

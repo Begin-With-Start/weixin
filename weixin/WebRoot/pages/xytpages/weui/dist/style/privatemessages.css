@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+
+.img-circle {border-radius:50%; -webkit-border-radius:50%;}
+.face img {width:2.6em; height:2.6em;}
+.private-dialogue-warp{ margin:0 auto; padding:16px; background-color:#fff;}
+.private-dialogue-warp dl { border-bottom:1px #ddd solid; padding:15px 0; height:50px; overflow:hidden;}
+.private_SRLr, .private_SRLl{ margin:0px 0;}
+.private_SRLl .face, .private_SRLl .content { float:left;}
+.private_SRLr .face, .private_SRLr .content { float:right;}
+.private_SRLl .af_content{ margin:0 0 0 15px;  position:relative; width:60%;white-space:nowrap;text-overflow:ellipsis;color:#0f1508; overflow:hidden;}
+.private_SRLr .af_content{ border:1px solid #8ddc57; border-radius:5px; line-height:22px; margin:0 15px 0 0; padding:15px 20px; position:relative; width:60%;word-wrap:break-word; background-color:#a0e75a; color:#0f1508;}
+.private-dialogue-warp .arrow { display:inline-block; height:14px; position:absolute; top:15px; width:11px; z-index:20; background:url(file:///D|/image/arrow_r.gif) no-repeat scroll 0 0;} 
+.private_SRLl .arrow{ left:-10px;background-position:0 -15px;}
+.private_SRLr .arrow{ right:-10px;} 
+.txt { color:#999;}
+.messagesnumber { float:right; background-color:#f00;  font-size:12px; border-radius:15px; height:30px; width:30px; position:relative; right:20px; top:-10px;}
+.messagesnumber span { height:30px; line-height:30px; display:block; text-align:center; color:#fff;}

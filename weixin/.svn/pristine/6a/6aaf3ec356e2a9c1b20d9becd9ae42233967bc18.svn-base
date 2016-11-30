@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+.m-margin { margin:32px 0;}
+.g-classDetail {width:100%; height:100%; font-family:'微软雅黑'; color:#a1a1a1;-webkit-overflow-scrolling:touch;-webkit-tap-highlight-color:rgba(0,0,0,0); background-color:#f1f1f1;}
+.m-nav2 { width:100%; line-height:45px; color:#fff; background-color:#04BE02;z-index:10; height:45px;}
+.m-nav2 h2 { text-align:center; font-size:16px; font-weight:normal; white-space:nowrap;}
+.m-classDetail { background-color:#fff; padding:28px 16px 44px 16px;}
+.m-classDetail-title { font-size:18px; color:#333;}
+.m-classDetail-num { font-size:13px; color:#999; margin-top:7px;}
+.m-classDetail-money { margin:15px;}
+.m-tabpanel-content-rednum { color:#ff7070; font-size:18px; font-weight:600; vertical-align:middle;}
+.m-tabpanel-content-money { font-size:10px;}
+.m-tabpanel-content-greennum{ background-color:#ff7070; color:#fff; font-size:10px; padding:3px 9px; border-radius:3px; margin-left:8px; vertical-align:middle;} 
+.x-list { background:#fff;}
+.x-list ul li {border-top:1px solid #ebebeb; line-height:50px; height:50px;}
+.x-list-top-detail { height:auto!important; padding:16px 16px 0 16px!important; border:none!important;}
+
+/*试听人数、报名人数*/
+.owl-item .avatars { padding-top:0;}
+.avatars .avatar { margin:5px;}
+.item { display: inline-block; vertical-align:middle; padding-bottom:5px;}
+.avatar { width:2.4em; height:2.4em; display:inline-block; position:relative;}
+.img-circle {border-radius:50%; -webkit-border-radius:50%;}
+.avatar img { width:100%; height:100%; border:0.15em solid #fff;}
+.avatar-sl img { width:2.6em; height:2.6em;}
+
+
+
+/*老师详情*/
+.m-box { padding:16px 16px 30px 16px; margin:15px; background-color:#fff; border-radius:2px;}
+.m-teacherDetail-title { font-size:17px; color:#393c3e; height:40px; font-weight:600; margin-bottom:20px;}
+.m-teacherDetail-title img { width:40px; clip:rect(0px 40px 40px 0px); position:absolute;}
+.m-teacherDetail-name { margin:22px 0 0 53px; float:left;}
+.m-teacherDetail-summary { font-size:16px; color:#aaa; margin-top:16px; text-indent:2em;}
+.m-zan-num { text-align:center; font-size:24px; color:#ccc; margin-top:24px;}
+.m-zan-num-red { color:#ff4f4d; font-size:24px;}
+.m-zan-img { text-align:center; padding:15px 0;} 
+.m-zan-img img { width:150px;}
+
+/*课程留言*/
+.course-messagetext { padding:16px 0 5px 0;}
+.course-messagetext textarea { width:100%; box-sizing:border-box; color:#333; font-size:14px; border:1px #ddd solid; border-top-color: #BBB; padding-left:9px;  height:100px;  -webkit-appearance:none; -webkit-tap-highlight-color:transparent; outline:0; -webkit-border-radius: 0; border-radius:3px; padding-top:9px;}
+
+/*底部*/
+.m-footer { margin:32px 0; width:100%}
+.m-footer-what {font-size: 9px;color: #b2b2b2; margin: 28px 0; text-align: center;}
+.js-order>input { border:none; background:transparent;}
+.btleft,.btright { width:49%; float:left; display:inline-block; font-size:16px; line-height:44px; color:#fff; font-weight:600;}
+
+.coursesummary { width:60%; overflow:hidden; white-space:nowrap;text-overflow:ellipsis;-webkit-text-overflow:ellipsis; }
+#headimgurl a { float:left; padding-left:5px; padding-right:5px; display:block;}

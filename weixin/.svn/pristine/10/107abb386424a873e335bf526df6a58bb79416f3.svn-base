@@ -1,0 +1,169 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no" />
+  <title>关爱山区孕妇-我们在行动</title>
+  <link rel="stylesheet" href="css/idangerous.swiper.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div class="share secLoad" data-url="url(img/share.png)"></div>
+  <div class="loading"><p>loading...</p></div>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide firLoad" data-url="url(img/page-1.jpg)">
+        <div class="one-slide-1"><img src="img/page-1-1.png"></div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div>
+      </div>
+      
+      <div class="swiper-slide secLoad" data-url="url(img/bk-1.jpg)">
+        <div class="five-slide-1">
+         
+          <p class="white">2015年4月，由湖南省慈善总会、潇湘晨报长啦网、合生元集团联合主办的“关爱山区孕妇”爱心行动组来到湘西山区麻阳县，随行的摄影师用镜头记录下了山区孕妇真实的生存情况和合生元为她们带去的爱心。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div> 
+      </div>
+      
+       <div class="swiper-slide firLoad" data-url="url(img/page-2.jpg)">
+        <div class="five-slide-1">
+          <p class="orange">李梦，24岁，麻阳县岩门镇居民。</p>
+          <p class="white">怀孕7个月的她依然在干粗重的农活；聋哑和智力低下，让她与这个世界隔着一道无法逾越的屏障。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div>
+      </div>
+      
+      <div class="swiper-slide firLoad" data-url="url(img/page-3.jpg)">
+        <div class="five-slide-1">
+          <p class="white">4月柑橘花盛开，花香洒满园地，但对于李梦来说，这一切美好的景致与她无关，她的世界，没有生活，只有生存。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div>
+      </div>
+      
+      
+      <!--<div class="swiper-slide firLoad" data-url="url(img/page-4.jpg)">
+         <div class="five-slide-1">
+          <p class="white">丈夫李凡东同为聋哑人，总是露出很夸张的笑容，他用手势告诉我无论生男生女，都会给这个家庭带来更多喜悦。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div>               
+      </div>-->
+      
+      
+      <div class="swiper-slide firLoad" data-url="url(img/page-13.jpg)">
+         <div class="five-slide-1">
+          <p class="white">李梦除了智力低下，精神也有一些问题，但是只要情绪没有特别大的反常，家里大部分的家务都是由她承担。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div>               
+      </div> 
+        
+      <div class="swiper-slide secLoad" data-url="url(img/page-6.jpg)">
+        <div class="five-slide-1-s">
+          <p class="white">李梦家的灶屋紧挨着橘园，虽然生活贫困拮据，但依然井井有条。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div> 
+      </div>
+      
+      <div class="swiper-slide firLoad" data-url="url(img/bk-2.jpg)">
+        <div class="five-slide-1">
+         
+          <p class="white">虽然平日的李梦寡言少语，但当她收到合生元丰厚的救助包和慰问金的时候，脸上还是露出了欣慰的笑容。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div>
+      </div>
+      
+      <div class="swiper-slide secLoad" data-url="url(img/page-7.jpg)">
+        <div class="five-slide-1">
+          <p class="orange">张冬玉，29岁，麻阳县桐子凉村民。</p>
+          <p class="white">张冬玉曾经怀孕了7次，但由于身体状况不好，均未成功分娩。这次是她第8次怀孕，胎儿刚满6个月。</p>
+        </div>
+          <div class="pub-passdown"><img src="img/pub-1.png"></div>
+      </div>
+         
+      <div class="swiper-slide secLoad" data-url="url(img/page-8.jpg)">
+         <div class="five-slide-1-s">
+          <p class="white">破旧的土砖房里到处堆放着杂物，四处还透风，没有一件电器，每月200元低保是这个家庭的全部收入。</p>
+        </div>
+          <div class="pub-passdown"><img src="img/pub-1.png"></div>
+      </div>
+      
+      <div class="swiper-slide secLoad" data-url="url(img/page-9.jpg)">
+          <div class="five-slide-1">
+          <p class="white">张冬玉的丈夫无劳动能力。虽然身怀六甲，但家里大小家务活都落在张冬玉的身上。</p>
+        </div>
+          <div class="pub-passdown"><img src="img/pub-1.png"></div> 
+      </div>
+      
+      
+      <div class="swiper-slide secLoad" data-url="url(img/page-10.jpg)">
+          <div class="five-slide-1">
+          <p class="white">做母亲是一个女人最简单最原始的愿望，虽然困难重重，但这一次她还是希望宝宝能够顺利降生。</p>
+        </div>
+          <div class="pub-passdown"><img src="img/pub-1.png"></div> 
+      </div>
+      
+      <div class="swiper-slide secLoad" data-url="url(img/bk-3.jpg)">
+        <div class="five-slide-1">
+         
+          <p class="white">第一次接触到合生元妈妈奶粉、钙片的张冬玉，对于这次的顺利生产，她又多了一份信心。</p>
+        </div>
+          <div class="pub-passdown"><img src="img/pub-1.png"></div>
+      </div>
+      
+      <div class="swiper-slide secLoad" data-url="url(img/page-11.jpg)">
+          <div class="five-slide-1">
+          <p class="orange">包银花，26岁，家住岩门平原2组。</p>
+          <p class="white">患有精神分裂症的她，日常生活完全不能自理，靠年过七旬的婆婆照料，夫妻双方均聋哑。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div> 
+      </div>
+      
+       <div class="swiper-slide secLoad" data-url="url(img/page-12.jpg)">
+          <div class="five-slide-1">
+          <p class="white">“补一下还可以穿，最近地里农活多，我还没来得及缝补”包银花年过七旬的婆婆指着墙上挂着的布鞋对我说。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div> 
+      </div>
+      
+      <div class="swiper-slide secLoad" data-url="url(img/page-14.jpg)">
+        <div class="five-slide-1">
+          <p class="white">傍晚，包银花的丈夫正在悉心地帮她梳理着头发，也许这样的举动是他对妻子表达爱意最好的方式。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div> 
+      </div>
+      
+       <div class="swiper-slide secLoad" data-url="url(img/bk-4.jpg)">
+          <div class="five-slide-1">
+          
+          <p class="white">当爱心大使将合生元孕妇救助包和慰问金送给包银花的时候，她开始有些手足无措，然后一直点头示意感谢。</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div> 
+      </div>
+      
+       <div class="swiper-slide secLoad" data-url="url(img/bk-5.jpg)">
+        <div class="five-slide-1">
+          <p class="white">合生元母婴救助基金湘赣地区负责人程艺先生：
+关爱贫困及患有疾病的母婴人群一直是合生元集团所倡导的公益事业，本次爱心行动合生元将帮助湖南100位山区孕妇，希望此次行动能够唤起更多社会爱心人士来关注这个孕育生命、延续生命的神圣人群！
+</p>
+        </div>
+        <div class="pub-passdown"><img src="img/pub-1.png"></div> 
+      </div>
+      
+      <div class="swiper-slide secLoad" data-url="url(img/lastPic.jpg)">      
+        <div class="twelve-slide-1"> 
+        </div>
+        <div class="button"><a href="http://m.zhongchou.cn/deal/id-128791?from=groupmessage&isappinstalled=0"><img src="img/page-8-2.png"></a></div>
+       
+      </div>
+    </div>
+    <div class="pagination"></div>
+  </div>
+  <audio id ="audio" autoplay="autoplay" loop> 
+   <source src="1.mp3"  type="audio/mpeg" />
+   Your browser does not support the audio element.
+  </audio>
+  <script src="js/idangerous.swiper-2.1.min.js"></script>
+  <script src="js/index.js?v=1.1"></script>
+</body>
+</html>

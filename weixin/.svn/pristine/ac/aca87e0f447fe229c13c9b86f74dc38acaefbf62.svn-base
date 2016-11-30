@@ -1,0 +1,173 @@
+package com.xyt.action;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.alibaba.fastjson.JSONObject;
+import com.xxcb.util.BaseAction;
+import com.xyt.dao.XytCourseDao;
+import com.xyt.dao.XytMessageDao;
+import com.xyt.dao.XytUserInfoDao;
+import com.xyt.po.XytCourse;
+import com.xyt.po.XytMessage;
+import com.xyt.po.XytUserInfo;
+import com.xyt.util.GsonUtil;
+
+@Scope("prototype")
+@Component("XytMessageAction")
+public class XytMessageAction  extends BaseAction{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7493412297901149055L;
+
+	@Resource
+	public XytMessageDao xytMessageDao;
+	
+	@Resource
+	public XytUserInfoDao xytUserInfoDao;
+	
+	@Resource
+	public XytCourseDao xytCourseDao;
+	
+	/**
+	 * 根据courseId查找对应的评论
+	 * @return
+	 */
+	/*public String course()
+	{
+		Integer courseId = Integer.parseInt((this.getRequest().getParameter("courseId")));
+		List<XytMessage> listXytMessage = xytMessageDao.getXytMessageByCourse(courseId);
+		this.getRequest().setAttribute("listXytMessage", listXytMessage);
+		return "course";
+	}*/
+	
+	/**
+	 * 根据teacherId查找对应的评论
+	 * @return
+	 */
+	public String getXytMessageByTeacherId()
+	{
+		Integer teacherId = Integer.parseInt(this.getRequest().getParameter("teacherId"));
+		List<XytMessage> listXytMessage = xytMessageDao.getXytMessageByTeacher(teacherId);
+		this.showjsondata(GsonUtil.toJson(listXytMessage));
+		return null;
+	}
+	
+	/**
+	 * 保存校园留言信息
+	 */
+	public String saveCollegeMessage()
+	{
+		Integer userid = Integer.valueOf(this.getRequest().getParameter("userid"));
+		String content = this.getRequest().getParameter("content");
+		if(("" != content) && (null != content)&& (0 != content.length()))
+		{
+			XytUserInfo xytUserInfo = xytUserInfoDao.getXytUserInfoByRid(userid).get(0);
+			XytMessage xytMessage = new XytMessage();
+			xytMessage.setAnonymity(false);
+			xytMessage.setContent(content);
+			xytMessage.setCreateDate(new Date());
+			xytMessage.setShow(true);
+			xytMessage.setXytTercherInfo(null);
+			xytMessage.setXytUserInfo(xytUserInfo);
+			xytMessage.setXytCollege(xytUserInfo.getCollege());
+			xytMessageDao.save(xytMessage);
+		}
+		JSONObject json = new JSONObject();
+		json.put("result", "success");
+		this.showjsondata(GsonUtil.toJson(json));
+		return null;
+	}
+	
+	/**
+	 * 保存校园匿名留言信息
+	 */
+	public String saveCollegeMessageAnonymity()
+	{
+		Integer userid = Integer.valueOf(this.getRequest().getParameter("userid"));
+		String content = this.getRequest().getParameter("content");
+		if(("" != content) && (null != content)&& (0 != content.length()))
+		{
+			XytUserInfo xytUserInfo = xytUserInfoDao.getXytUserInfoByRid(userid).get(0);
+			XytMessage xytMessage = new XytMessage();
+			xytMessage.setAnonymity(true);
+			xytMessage.setContent(content);
+			xytMessage.setCreateDate(new Date());
+			xytMessage.setShow(true);
+			xytMessage.setXytTercherInfo(null);
+			xytMessage.setXytUserInfo(xytUserInfo);
+			xytMessage.setXytCollege(xytUserInfo.getCollege());
+			xytMessageDao.save(xytMessage);
+		}
+		JSONObject json = new JSONObject();
+		json.put("result", "success");
+		this.showjsondata(GsonUtil.toJson(json));
+		return null;
+	}
+	
+	/**
+	 *保存留言信息
+	 */
+	public String saveXytMessage()
+	{
+		XytMessage xytMessage = new XytMessage();
+		Integer courseId = Integer.parseInt(this.getRequest().getParameter("courseId"));
+		Integer userid = Integer.valueOf(this.getRequest().getParameter("userid"));
+		//留言内容
+		String content = this.getRequest().getParameter("content");
+		
+		if(("" != content) && (null != content)&& (0 != content.length()))
+		{
+			XytUserInfo xytUserInfo = xytUserInfoDao.getXytUserInfoByRid(userid).get(0);
+			XytCourse xytCourse = xytCourseDao.getXytCourseByRid(courseId).get(0);
+			xytMessage.setAnonymity(false);
+			xytMessage.setContent(content);
+			xytMessage.setCreateDate(new Date());
+			xytMessage.setShow(true);
+			xytMessage.setXytCourse(xytCourse);
+			xytMessage.setXytTercherInfo(null);
+			xytMessage.setXytUserInfo(xytUserInfo);
+			xytMessageDao.save(xytMessage);
+		}
+		JSONObject json = new JSONObject();
+		json.put("result", "success");
+		this.showjsondata(GsonUtil.toJson(json));
+		return null;
+	}
+	
+	/**
+	 * 保存匿名留言信息
+	 */
+	public String saveXytMessageAnonymity()
+	{
+		XytMessage xytMessage = new XytMessage();
+		Integer courseId = Integer.parseInt(this.getRequest().getParameter("courseId"));
+		Integer userid = Integer.valueOf(this.getRequest().getParameter("userid"));
+		//留言内容
+		String content = this.getRequest().getParameter("content");
+		if(("" != content) && (null != content)&& (0 != content.length()))
+		{
+			XytUserInfo xytUserInfo = xytUserInfoDao.getXytUserInfoByRid(userid).get(0);
+			XytCourse xytCourse = xytCourseDao.getXytCourseByRid(courseId).get(0);
+			xytMessage.setAnonymity(true);
+			xytMessage.setContent(content);
+			xytMessage.setCreateDate(new Date());
+			xytMessage.setShow(true);
+			xytMessage.setXytCourse(xytCourse);
+			xytMessage.setXytTercherInfo(null);
+			xytMessage.setXytUserInfo(xytUserInfo);
+			xytMessageDao.save(xytMessage);
+		}
+		JSONObject json = new JSONObject();
+		json.put("result", "success");
+		this.showjsondata(GsonUtil.toJson(json));
+		return null;
+	}
+}

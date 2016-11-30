@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+        <title>login</title>
+        <link rel="stylesheet" href="weui/dist/style/weui.min.css"/>
+        <link type="text/css" rel="stylesheet" href="css/reset.css">
+ 		<link type="text/css" rel="stylesheet" href="css/default.css">
+ 		<link type="text/css" rel="stylesheet" href="css/content.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/PicCarousel.js"></script>
+	<script type="text/javascript" src="/weixin/pages/file/scripts/MessageBox.js" charset='utf-8'></script>
+	<script type="text/javascript">
+	function clickHandler(){
+		var phonenumber = document.getElementById('tel').value;
+		var reg = new RegExp("^[0-9]*$");
+		if((!reg.test(phonenumber)) || ((phonenumber.length != 11)&&(phonenumber.length != 12))){
+			showAlert("输入的电话号码有误，请重新输入");
+		}else
+		{
+			window.location.href='/weixin/pages/timeLine/index.html?tel='+phonenumber;
+		}
+	}
+	
+	
+	function showAlert(str)
+	{
+		var messContent="<div style='background:#eee;font-size:14px;line-height:1.5rem;padding:5px 10px 10px 10px;text-align:center;'>"+str+"</div>";  // 弹出提示框  
+		messageBox.showMessageBox('',messContent,250); 
+	}
+	
+	var messageBox; (function(){ messageBox = new __messageBox(); })(); 		
+	</script>
+    </head>
+    
+    <body>
+    	<img style = "width:100%" src="/weixin/pages/timeLine/img/xxcblogo.jpg"/>
+  		<div style="position:fixed; bottom:0;width:100%" class="weui_btn weui_btn_primary" onClick="clickHandler()">确定</div>
+  		<input name="tel" type="text" id="tel" value="电话号码" size="20"               
+		 onmouseover=this.focus();this.select();              
+		 onclick="if(value==defaultValue){value='';this.style.color='#000'}"              
+		 onBlur="if(!value){value=defaultValue;this.style.color='#999'}" 
+		 style="color:#999; position:fixed;left:25%;width:50%;height:30px;font-size:16px;bottom:80px" 
+	 />
+    </body>
+</html>

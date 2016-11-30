@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+.m-margin { margin:32px 0;}
+.g-classDetail {width:100%; height:100%; font-family:'微软雅黑'; color:#a1a1a1;-webkit-overflow-scrolling:touch;-webkit-tap-highlight-color:rgba(0,0,0,0); background-color:#f1f1f1;}
+.m-nav2 { width:100%; line-height:45px; color:#fff; background-color:#04BE02;z-index:10; height:45px;}
+.m-nav2 h2 { text-align:center; font-size:16px; font-weight:normal; white-space:nowrap;}
+.clearfix { display:block; zoom:1;}
+
+/*底部菜单样式*/
+.m-bottomPanel{ height:44px; width:100%; color:#fff; background-color:#04BE02; font-size:16px; text-align:center; line-height:44px; position:fixed; bottom:0;}
+.m-bottomPanel-shoppingCart { width:49%; display:inline-block; float:left;}
+.m-bottomPanel-line { border-right:1px #fff solid; width:1px; float:left; height:28px; margin-top:9px;}
+.m-bottomPanel-pay { width:50%; display:inline-block;}
+
+/*组团底部菜单*/
+.js-order>input { border:none; background:transparent;}
+.myteam,.creatgroup,.btleft,.btright{ width:49%; float:left; display:inline-block; font-size:16px; line-height:44px; color:#fff;}
+.group-img-circle{border-radius:50%; -webkit-border-radius:50%;}
+
+/*留言列表样式*/
+.m-messages-area { padding:16px; border-bottom:1px solid #D9D9D9;}
+.m-messages-title { font-size:17px; color:#393c3e; height:40px; font-weight:600; margin-bottom:20px;}
+.m-messages-title img {  width:2.6em; height:2.6em; position:absolute;}
+
+/*图片样式*/
+.m-messages-area { padding:16px; border-bottom: 1px solid #D9D9D9;}
+.m-messages-title { font-size: 17px; color: #393c3e; height: 40px; font-weight: 600; margin-bottom: 20px;}
+.m-messages-title img { width: 2.6em; height: 2.6em;position: absolute;}
+.m-messages-nickname { margin: 10px 0 0 53px;float: left; color:#aaa;}
+.m-messages-time { color:#aaa; font-weight:normal;}
+.m-messages-summary {font-size: 18px; color: #333;margin-top: 16px;text-indent: 2em;}
+.img-circle {border-radius:50%; -webkit-border-radius:50%;}
+
+/*性别样式*/
+[data-icon]:before, .icon-Wallet:before, .icon-_card-msg:before, .icon-ancher:before, .icon-attribute-error:before, .icon-breadcrumb-arrow:before, .icon-breadcrumb-home-icon:before, .icon-btn-add:before, .icon-camp-favorite-heart:before, .icon-camp-share-dm:before, .icon-camp-share-email:before, .icon-camp-share-link:before, .icon-camp-status-joined-people:before, .icon-camp-status-time-left:before, .icon-campaign-card-status-approved:before, .icon-campaign-card-status-wait-review:before, .icon-card-lk:before, .icon-card-love:before, .icon-card-love-on:before, .icon-card-mail:before, .icon-card-msg:before, .icon-card-wc:before, .icon-check-right-bottom:before, .icon-checked:before, .icon-create-select-arrow:before, .icon-create-success-icon:before, .icon-crown:before, .icon-crown2:before, .icon-cs-msg:before, .icon-cs-share:before, .icon-cs-share-bw:before, .icon-custom-fields-add:before, .icon-custom-fields-remove:before, .icon-default-avatar:before, .icon-douban2:before, .icon-fareboard-arrow:before, .icon-fareboard-arrow-on:before, .icon-gi-female:before, .icon-gi-male:before, .icon-he-created-campaign:before, .icon-he-joined-campaign:before, .icon-he-joined-campaign2:before, .icon-he-liked-campaign:before, .icon-he-personal-center:before, .icon-he-settings:before, .icon-he-signout:before, .icon-helptext-arrow:before, .icon-helptext-icon:before, .icon-howto-step-icon-2:before, .icon-howto-step-icon-3:before, .icon-howto-step-icon-4:before, .icon-howto-step-icon-5:before, .icon-iframe-close:before, .icon-job-icon-design:before, .icon-job-icon-dev:before, .icon-job-icon-op:before, .icon-mail-left-arrow:before, .icon-mail-right-arrow:before, .icon-mail-unread-bg:before, .icon-or-line-bg:before, .icon-password-input-bg:before, .icon-pencill:before, .icon-phone-icon:before, .icon-private-lock:before, .icon-progress-arrow:before, .icon-qzone:before, .icon-raduio:before, .icon-raduio-checked:before, .icon-raise-selector-icon:before, .icon-search:before, .icon-settings-mobile:before, .icon-settings-realname:before, .icon-settings-withdraw:before, .icon-share-icon:before, .icon-sign-third-qq-hover:before, .icon-sign-third-renren-hover:before, .icon-sns-share-douban-on:before, .icon-sns-share-linkedin-on:before, .icon-sns-share-on:before, .icon-sns-share-qq-on:before, .icon-sns-share-renren-on:before, .icon-sns-share-weibo-on:before, .icon-social-link-wechat:before, .icon-spirit-create:before, .icon-spirit-learn:before, .icon-spirit-play:before, .icon-split-selector-icon-hover:before, .icon-split-table-sep-arrow:before, .icon-split-table-start-arrow:before, .icon-ssl-protect-shield:before, .icon-username-input-bg:before, .icon-warning-sign:before, .icon-wechat:before, .icon-weixin:before, .icon-why-reason-1:before, .icon-why-reason-2:before, .icon-why-reason-3:before, .icon-why-reason-4:before, .icon-why-reason-5:before, .icon-why-reason-6:before{display: inline-block;font-family: "fontdiao";font-style: normal; font-weight: normal; font-variant: normal; line-height: 1;text-decoration: inherit; text-rendering: optimizeLegibility;text-transform: none;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased; font-smoothing: antialiased;}
+*:before, *:after { box-sizing: border-box;}
+
+/*弹窗样式*/
+#dialogtitle { font-size:20px; line-height:2; text-align:left; font-weight:bold; color:#333; padding-left:26px;}
+#dialogmessage { font-size:16px; line-height:2; text-align:left; text-indent:2em; font-weight:normal; white-space:normal; word-spacing:normal;}
+#dialogtitle1 { font-size:20px; line-height:2; text-align:left; font-weight:bold; color:#333; padding-left:26px;}
+#dialogmessage1 { font-size:16px; line-height:2; text-align:left; text-indent:2em; font-weight:normal; white-space:normal; word-spacing:normal;}

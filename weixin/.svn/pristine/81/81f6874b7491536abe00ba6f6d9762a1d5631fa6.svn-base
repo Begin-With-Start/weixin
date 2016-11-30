@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+.writer-main{  position:fixed; bottom:0; width:100%;}
+.writer-wrap { border-radius:3px; background-color:#fff; padding:16px;}
+.error-tip { color:#ff0000; font-size:14px; line-height:28px; margin-bottom:8px; margin-top:-8px;}
+.input-bottom { border-bottom:1px solid #ebebeb;}
+.input-group { position:relative;}
+.p139-input { width:100%; border-radius:3px; box-sizing:border-box; color:#999; font-size:17px; border:1px #eee solid; margin-bottom:10px; line-height:17px; padding:16px 0; -webkit-appearance:none; -webkit-tap-highlight-color:transparent; outline:0;}
+.input-captcha { position:relative;}
+.input-captcha .captcha-img { position:absolute; right:15px; top:8px; width:54px; height:32px;}
+
+.img-circle {border-radius:50%; -webkit-border-radius:50%;}
+.face img {width:2.6em; height:2.6em;}
+.private-dialogue-warp{ margin:0 auto; padding:16px; background-color:#fff;}
+.private_SRLr, .private_SRLl{ margin:30px 0;}
+.private_SRLl .face, .private_SRLl .content { float:left;}
+.private_SRLr .face, .private_SRLr .content { float:right;}
+.private_SRLl .af_content{ border:1px solid #D5D5D5; border-radius:5px; line-height:22px; margin:0 0 0 15px; padding:15px 20px; position:relative; width:60%;word-wrap:break-word; color:#0f1508;}
+.private_SRLr .af_content{ border:1px solid #8ddc57; border-radius:5px; line-height:22px; margin:0 15px 0 0; padding:15px 20px; position:relative; width:60%;word-wrap:break-word; background-color:#a0e75a; color:#0f1508;}
+.private-dialogue-warp .arrow { display:inline-block; height:14px; position:absolute; top:15px; width:11px; z-index:20; background:url(../../../image/arrow_r.gif) no-repeat scroll 0 0;} 
+.private_SRLl .arrow{ left:-10px;background-position:0 -15px;}
+.private_SRLr .arrow{ right:-10px;} 

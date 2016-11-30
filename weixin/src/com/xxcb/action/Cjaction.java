@@ -1,0 +1,781 @@
+package com.xxcb.action;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.marker.config.Config;
+import org.marker.utils.HttpUtil;
+import org.marker.utils.MySecurity;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.xxcb.dao.CjxmDao;
+import com.xxcb.po.BrandWCPayParameter;
+import com.xxcb.po.Cjxm;
+import com.xxcb.po.FootbathRecord;
+import com.xxcb.po.InvitationRecord;
+import com.xxcb.po.Jfdh;
+import com.xxcb.po.Jfdhjl;
+import com.xxcb.po.Order;
+import com.xxcb.po.Qgjl;
+import com.xxcb.po.QgjlDTO;
+import com.xxcb.po.ScoreCode;
+import com.xxcb.po.UserInfo;
+import com.xxcb.po.Yhqxx;
+import com.xxcb.po.Zjjl;
+import com.xxcb.po.ZjjlDTO;
+import com.xxcb.util.BaseAction;
+import com.xxcb.util.InvitationCodeUtil;
+import com.xxcb.util.JsonUtil;
+import com.xxcb.weixin.SignUtil;
+
+@SuppressWarnings("serial")
+@Scope("prototype")
+@Component("Cjaction")
+public class Cjaction extends BaseAction{
+
+	@Resource
+	public CjxmDao dao;
+	
+	/**
+	 * 根据name和tel获取业务记录
+	 */
+	public String getAllYwjlByNameAndTel(){
+		String tel = this.getRequest().getParameter("tel");
+		List list = dao.getYwhzByNameAndTel(tel);
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	
+	/**
+	 * 根据openid获取洗脚的记录数
+	 */
+	public String getFootBathAmount()
+	{
+		String openId = this.getRequest().getParameter("openId");
+		int amount = dao.getFBAmount(openId);
+		System.out.println(amount);
+		this.showjsondata(String.valueOf(amount));
+		return null;
+	}
+	
+	/**
+	 * 保存输入邀请码记录
+	 */
+	public String saveInviteRecord()
+	{
+		String userId = this.getRequest().getParameter("userId");
+		String code = this.getRequest().getParameter("code");
+		InvitationRecord invitationRecord = new InvitationRecord();
+		
+		invitationRecord.setUserid(userId);
+		List listUser = dao.getUserByOpenId(userId);
+		if( 0 != listUser.size())
+		{
+			UserInfo userInfo = (UserInfo) listUser.get(0);
+			invitationRecord.setNickname(userInfo.getNickname());
+		}
+		
+		List listCode = dao.getCodeByCode(code);
+		if(0 != listCode.size())
+		{
+			ScoreCode scoreCode = (ScoreCode) listCode.get(0);
+			if(scoreCode.getUserId().equals(userId))
+			{
+				this.showjsondata("-1");
+			}else{
+				//积分增加
+				dao.updateScoreByCode(scoreCode.getRid());
+				invitationRecord.setInviterUserid(scoreCode.getUserId());
+				invitationRecord.setInviterNickname(scoreCode.getNickName());
+				invitationRecord.setInvitationCode(code);
+				dao.save(invitationRecord);
+				this.showjsondata("1");
+			}
+		}else
+		{
+			this.showjsondata("0");
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * 保存邀请码
+	 */
+	public String saveInviteCode()
+	{
+		String userId = this.getRequest().getParameter("userId");
+		List list = dao.getUserByOpenId(userId);
+		ScoreCode scoreCode = new ScoreCode();
+		scoreCode.setUserId(userId);
+		if(0 != list.size())
+		{
+			UserInfo userInfo = new UserInfo();
+			userInfo = (UserInfo) list.get(0);
+			scoreCode.setNickName(userInfo.getNickname());
+		}
+		scoreCode.setScore(0);
+		//不重复的随机邀请码
+		List<ScoreCode> listAllCode = dao.getAllScoreCode();
+		String invitationCode = new String();
+		while(true)
+		{
+			invitationCode = InvitationCodeUtil.getRandomCharAndNumr();
+			int j = 0;
+			for(int i = 0 ; i < listAllCode.size() ; i++)
+			{
+				if(invitationCode.equals(listAllCode.get(i).getInvitationCode()))
+				{
+					break;
+				}else
+				{
+					j++;
+				}
+			}
+			if(j == listAllCode.size())
+			{
+				System.out.println("j == listAllCode.size()");
+				break;
+			}
+			
+		}
+		scoreCode.setInvitationCode(invitationCode);
+		dao.save(scoreCode);
+		this.showjsondata(invitationCode);
+		return null;
+	}
+	
+	/**
+	 * 根据UserId获取输入邀请码的记录
+	 */
+	public String getInviteRecordByUserId()
+	{
+		String userId = this.getRequest().getParameter("userId");
+		@SuppressWarnings("unchecked")
+		List<ScoreCode> list = dao.getInviteRecordByUserId(userId);
+		if(0 == list.size())
+		{
+			this.showjsondata("0");
+		}
+		else
+		{
+			JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+			JSONArray json = JSONArray.fromObject(list, jsonConfig);
+			this.showjsondata(json.toString());
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * 根据xmid获取兑换项目
+	 */
+	public String getDhxmByxmid()
+	{
+		String xmid = this.getRequest().getParameter("xmid");
+		@SuppressWarnings("unchecked")
+		List<Jfdh> list = dao.getDhxmByxmid(xmid);
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	/**
+	 * 根据UserId获取邀请码
+	 */
+	public String getCodeByUserId()
+	{
+		String userId = this.getRequest().getParameter("userId");
+		@SuppressWarnings("unchecked")
+		List<ScoreCode> list = dao.getCodeByUserId(userId);
+		if(0 == list.size())
+		{
+			this.showjsondata("0");
+		}
+		else
+		{
+			JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+			JSONArray json = JSONArray.fromObject(list, jsonConfig);
+			this.showjsondata(json.toString());
+		}
+		return null;
+	}
+	
+	
+	
+	/**
+	 * 根据openid获取nickname
+	 */
+	public String getNicknameByOpenId()
+	{
+		String openId = this.getRequest().getParameter("openId");
+		@SuppressWarnings("unchecked")
+		List<UserInfo> list = dao.getUserByOpenId(openId);
+		UserInfo userInfo = (UserInfo) list.get(0);
+		String nickName = userInfo.getNickname();
+		System.out.println(nickName);
+		this.showjsondata(nickName);
+		return null;
+	}
+	
+	/**
+	 * 保存洗脚记录
+	 */
+	public String saveFootBathRecord()
+	{
+		String openId = this.getRequest().getParameter("openId");
+		String nickName = this.getRequest().getParameter("nickName");
+		String helper = this.getRequest().getParameter("helper");
+		FootbathRecord footbathRecord = new FootbathRecord();
+		footbathRecord.setOpenId(openId);
+		footbathRecord.setNickName(nickName);
+		footbathRecord.setHelper(helper);
+		dao.save(footbathRecord);
+		return null;
+	}
+	
+	/**
+	 * 保存订单信息
+	 * @param 
+	 * @return null
+	 */
+	public String saveOrder()
+	{
+		String name = this.getRequest().getParameter("name");
+		String phoneNumber = this.getRequest().getParameter("phoneNumber");
+		String address = this.getRequest().getParameter("address");
+		String product = this.getRequest().getParameter("product");
+		Order order = new Order();
+		order.setAddr(address);
+		order.setAmount("1");
+		order.setName(name);
+		order.setTel(phoneNumber);
+		order.setProduct(product);
+		dao.save(order);
+		return null;
+	}
+	
+	/**
+	 * 保存积分兑换记录
+	 */
+	public String saveJfdhjl()
+	{
+		String xmid = this.getRequest().getParameter("xmid");
+		String name = this.getRequest().getParameter("name");
+		String tel = this.getRequest().getParameter("tel");
+		String userid = this.getRequest().getParameter("userid");
+		String jiage = this.getRequest().getParameter("jiage");
+		String addr = this.getRequest().getParameter("addr");
+		
+		Jfdhjl jfdhjl = new Jfdhjl();
+		jfdhjl.setName(name);
+		jfdhjl.setTel(tel);
+		jfdhjl.setUserid(userid);
+		jfdhjl.setXmid(Integer.valueOf(xmid));
+		jfdhjl.setDhsj(new Date());
+		jfdhjl.setAddr(addr);
+		dao.updateDhxmFenshuByXmid(Integer.valueOf(xmid));
+		dao.updateScoreByUserid(userid,Integer.valueOf(jiage));
+		dao.save(jfdhjl);
+		return null;
+		
+	}
+	
+	
+	/**
+	 * 保存抢购记录
+	 * @param 
+	 * @return null
+	 */
+	public String saveQgjl()
+	{
+		String xmid = this.getRequest().getParameter("xmid");
+		String name = this.getRequest().getParameter("name");
+		String tel = this.getRequest().getParameter("tel");
+		String userid = this.getRequest().getParameter("userid");
+		String addr = this.getRequest().getParameter("addr");
+		String total = this.getRequest().getParameter("total");
+		
+		
+		Qgjl qgjl = new Qgjl();
+		qgjl.setName(name);
+		qgjl.setTel(tel);
+		qgjl.setUserid(userid);
+		qgjl.setXmid(Integer.valueOf(xmid));
+		qgjl.setQgsj(new Date());
+		qgjl.setAddr(addr);
+		qgjl.setFenshu(total);
+		dao.save(qgjl);
+		dao.updateQgxmFenshuByXmid(Integer.parseInt(xmid));
+		return null;
+	}
+	
+	public String getQgxmByXmid()
+	{
+		String xmid = this.getRequest().getParameter("xmid");
+		System.out.println("xmid"+xmid);
+		List list  = dao.getQgxmByXmid(Integer.valueOf(xmid));
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	/**
+	 * 获取appId、timeStamp、nonceStr、package、signType、paySign
+	 * @param userinfo
+	 * @return string
+	 * getParameteraction
+	 */
+	public String getParameter()
+	{
+		//打印日志
+		PropertyConfigurator.configure( "C:/Program Files/Apache Software Foundation/Tomcat 6.0/webapps/weixin/WEB-INF/log4j.properties" );
+		final Logger logger  =  Logger.getLogger(Cjaction.class );
+		
+		BrandWCPayParameter brandWCPayParameter = new BrandWCPayParameter();
+		
+		String key = "05347148538346029poiuytrewqLKJHG";
+		
+		//从页面将用户openid传入
+		String userid = this.getRequest().getParameter("userid");
+		
+		String addrip = this.getRequest().getParameter("addrip");
+		
+		//appId
+		String appId = Config.APPID;
+		
+		//timeStamp
+		String timeStamp = String.valueOf(System.currentTimeMillis()/1000);
+		
+		//nonceStr随机字符串
+		String nonceStr=String.valueOf(Math.random());
+		
+		String signType = "MD5";
+		
+		//package订单详情扩展字符串  prepay_id
+		String prepay_id = new String();
+
+		prepay_id = HttpUtil.getPrepayId(userid,addrip);
+		
+		String packAge = "prepay_id=" + prepay_id;
+		
+		//获取签名
+		String []array = {"appId=".concat(appId), "timeStamp=".concat(timeStamp), "nonceStr=".concat(nonceStr),
+				"package=".concat(packAge), "signType=".concat(signType)};
+		
+		SignUtil.sort(array);
+		
+		//组合成stringA
+		String stringA = new String() ;
+		
+		String stringSignTemp = new String();
+		
+		String paySign = new String();
+		
+		for(int i = 0 ; i < array.length ; i++)
+		{
+			stringA = stringA.concat(array[i].concat("&"));
+		}
+		
+		
+		
+		stringSignTemp = stringA.concat("key=").concat(key);
+		
+		MySecurity mySecurity = new MySecurity();
+		
+		paySign = mySecurity.encode(stringSignTemp, "MD5");
+		
+		//将sign所有的字母换成大写  得到sign
+		paySign = paySign.toUpperCase();
+		
+		brandWCPayParameter.setAppId(appId);
+		brandWCPayParameter.setNonceStr(nonceStr);
+		brandWCPayParameter.setPackAge(packAge);
+		brandWCPayParameter.setPaySign(paySign);
+		brandWCPayParameter.setSignType(signType);
+		brandWCPayParameter.setTimeStamp(timeStamp);
+		
+		logger.error("stringA ="+stringA);
+		logger.error("stringSignTemp ="+stringSignTemp);
+		logger.error("paySign ="+paySign);
+		logger.error("appId ="+appId);
+		logger.error("nonceStr ="+nonceStr);
+		logger.error("package ="+packAge);
+		logger.error("signType ="+signType);
+		logger.error("timeStamp ="+timeStamp);
+		
+		List<BrandWCPayParameter> list = new ArrayList<BrandWCPayParameter>();
+		list.add(brandWCPayParameter);
+		
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	
+	public String saveUserInfo(UserInfo userinfo)
+	{
+		dao.save(userinfo);
+		return null;
+	}
+	
+	/**
+	 * 修改wx_userinfo电话号码
+	 * @return
+	 */
+	public String updateUserPhoneNumber()
+	{
+		String openId = this.getRequest().getParameter("openId");
+		String phoneNumber = this.getRequest().getParameter("phoneNumber");
+		dao.updateUserInfoPhoneNumber(openId, phoneNumber);
+		return null;
+	}
+	
+	/**
+	 * 修改zjjl电话号码
+	 * @return
+	 */
+	public String updateZjjlPhoneNumber()
+	{
+		String openId = this.getRequest().getParameter("openId");
+		String phoneNumber = this.getRequest().getParameter("phoneNumber");
+		dao.updateZjjlPhoneNumber(openId, phoneNumber);
+		return null;
+	}
+	
+	/**
+	 * 获取所有的抢购项目
+	 * @return
+	 */
+	public String getAllQgxm(){
+		List list =  dao.getAllQgxm();
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		System.out.println(json.toString());
+		this.showjsondata(json.toString());
+		return null;
+	}
+
+	/**
+	 * 获取所有的积分兑换项目
+	 * @return
+	 */
+	public String getAllJfdhxm(){
+		List list =  dao.getAllJfdhxm();
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		System.out.println(json.toString());
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	/**
+	 * 根据xmid获取兑换项目
+	 */
+	public String getCjxmByxmid()
+	{
+		String xmid = this.getRequest().getParameter("xmid");
+		@SuppressWarnings("unchecked")
+		List<Jfdh> list = dao.getCjxmByxmid(xmid);
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	
+	/**
+	 * 获取所有的猜奖项目
+	 * @return
+	 */
+	public String getAllCjxm(){
+		List list =  dao.getAllCjxm();
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		System.out.println(json.toString());
+		this.showjsondata(json.toString());
+		return null;
+	}
+
+	public String getAllZjjlByUser(){
+		String userid = this.getRequest().getParameter("userid");
+		List list = dao.getAllZjjlByUser(userid);
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		System.out.println("json.toString()"+json.toString());
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	/**
+	 * 获取抢购记录
+	 * @return
+	 */
+	public String getAllQgjlByUser(){
+		String userid = this.getRequest().getParameter("userid");
+		List list = dao.getAllQgjlByUser(userid);
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
+		System.out.println("json.toString()"+json.toString());
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	/**
+	 * 获取兑换记录
+	 */
+	public String showDhjlByUser()
+	{
+		String userid = this.getRequest().getParameter("userid");
+		List list = dao.showDhjlByUser(userid);
+		List newlist = new ArrayList();
+		for (int i = 0 ; i<list.size() ;i++){
+			Object[] obj = (Object[])list.get(i);
+			QgjlDTO dto = new QgjlDTO();
+			dto.setDbt((String)obj[0]);
+			String qgsj = String.valueOf(obj[1]);
+			dto.setQgsj(qgsj.substring(0, 10));
+			newlist.add(dto);
+		}
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(newlist, jsonConfig);
+		System.out.println(json.toString());
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	
+	/**
+	 * 获取抢购记录
+	 * @return
+	 */
+	public String showQgjlByUser(){
+		String userid = this.getRequest().getParameter("userid");
+		List list = dao.showQgjlByUser(userid);
+		List newlist = new ArrayList();
+		for (int i = 0 ; i<list.size() ;i++){
+			Object[] obj = (Object[])list.get(i);
+			QgjlDTO dto = new QgjlDTO();
+			dto.setDbt((String)obj[0]);
+			String qgsj = String.valueOf(obj[1]);
+			dto.setQgsj(qgsj.substring(0, 10));
+			newlist.add(dto);
+		}
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(newlist, jsonConfig);
+		System.out.println(json.toString());
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	/**
+	 * 获取中奖记录
+	 * @return
+	 */
+	public String showZjjlByUser(){
+		String userid = this.getRequest().getParameter("userid");
+		List list = dao.showZjjlByUser(userid);
+		List newlist = new ArrayList();
+		for (int i = 0 ; i<list.size() ;i++){
+			Object[] obj = (Object[])list.get(i);
+			ZjjlDTO dto = new ZjjlDTO();
+			dto.setDbt((String)obj[0]);
+			dto.setZjlx((String)obj[1]);
+			DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  
+			
+			System.out.println("obj[2].getClass() "+obj[2].getClass());
+			
+			dto.setKjsj(sdf.format(obj[2]));
+			dto.setZjbm((String)String.valueOf(obj[3]));
+			dto.setYhqbm((String)obj[4]);
+			newlist.add(dto);
+		}
+		JsonConfig jsonConfig = JsonUtil.configJson("yyyy-MM-dd HH:mm:ss");
+		JSONArray json = JSONArray.fromObject(newlist, jsonConfig);
+		System.out.println(json.toString());
+		this.showjsondata(json.toString());
+		return null;
+	}
+	
+	/**
+	 * 桶装水抽奖
+	 * @return
+	 */
+	public String savetzscj(){
+		String userid = this.getRequest().getParameter("userid");
+		String xmid = this.getRequest().getParameter("xmid");
+		String phoneNumber = this.getRequest().getParameter("phoneNumber");
+		
+		//先获取奖品剩余数量
+		List<Cjxm> list = dao.getFenshuByXmid(Integer.parseInt(xmid));
+		int fenshu = Integer.valueOf(list.get(0).getFenshu());
+		System.out.println("fenshu" +fenshu);
+		if(0 == fenshu)
+		{
+			//未中奖则返回0
+			Zjjl zjjl = new Zjjl();
+			zjjl.setUserid(userid);
+			zjjl.setZjsj(new Date());
+			zjjl.setXmid(Integer.valueOf(xmid));
+			zjjl.setTel(phoneNumber);
+			zjjl.setZjlx("0");
+			zjjl.setZjbm(" ");
+			dao.save(zjjl);
+			this.showjsondata("0");
+			System.out.println("fenshu为0");
+			return null;
+		}
+		
+		//设置中奖概率为1/2
+		java.util.Random random=new java.util.Random();
+		int level=random.nextInt(2) + 1;
+		//如果随机数为1则表示中奖
+		
+		System.out.println("level" +level);
+		if(1 == level)
+		{
+			//保存中奖记录，并减少存量
+			Zjjl zjjl = new Zjjl();
+			zjjl.setUserid(userid);
+			zjjl.setZjsj(new Date());
+			zjjl.setXmid(Integer.valueOf(xmid));
+			zjjl.setTel(phoneNumber);
+			zjjl.setZjlx("1");
+			zjjl.setZjbm(" ");
+			dao.save(zjjl);
+			System.out.println("save" );
+			dao.updateFenshuByXmid(Integer.parseInt(xmid));
+			//中奖则返回1
+			this.showjsondata("1");
+			return null;
+		}
+		else
+		{
+			Zjjl zjjl = new Zjjl();
+			zjjl.setUserid(userid);
+			zjjl.setZjsj(new Date());
+			zjjl.setXmid(Integer.valueOf(xmid));
+			zjjl.setTel(phoneNumber);
+			zjjl.setZjlx("0");
+			zjjl.setZjbm(" ");
+			dao.save(zjjl);
+			this.showjsondata("0");
+			return null;
+		}
+	}
+	
+	
+	public String savecj(){
+		String userid = this.getRequest().getParameter("userid");
+		String xmid = this.getRequest().getParameter("xmid");
+		String phoneNumber = this.getRequest().getParameter("phoneNumber");
+		
+		/**
+		 * 完成中奖逻辑编码小奖分为一、二等奖。奖券池加入空号，奖券池的中奖概率控制为90%，直到抽完为止。
+		 * 优惠卷抽完后还可以继续抽大奖，无小奖。
+		 * 首先获取奖池中所有奖品份数
+		 * 目前只抽取优惠券
+		 */
+		List<Cjxm> list_cjxm =  dao.getAllCjxm();
+		List<Zjjl> list_zjjl = dao.getAllZjjl();
+		List<Yhqxx> list_yhqxx = dao.getAllYhqxxNotUsed();
+		int fenshu = 0;//代金券份数
+		int zjbm = 0; //唯一性六位数中奖编码
+		int zjlx=0; //中奖等级
+		String yhqbm = null; //优惠券编码
+		String yhqmm = null; //优惠券密码
+		Date enddate = null; //截止时间
+		final float epsilon=(float) 0.000001;
+		fenshu = list_yhqxx.size();
+		if(fenshu > 0)
+		{
+			float youhuiquan = (float) (fenshu*0.8);
+			float random = (float)(Math.random()*fenshu);
+			if(youhuiquan - random > epsilon)
+			{
+				//中奖后从代金券池中随机获取奖券
+				int number = (int)(Math.random()*fenshu);
+				Yhqxx yhqxx = list_yhqxx.get(number);
+				String yhqje = yhqxx.getYhqje();
+				yhqbm = yhqxx.getYhqbm();
+				yhqmm = yhqxx.getYhqmm();
+				enddate = yhqxx.getEnddate();
+				if(yhqje.equals("10"))
+				{
+					zjlx=2;
+				}else if(yhqje.equals("5"))
+				{
+					zjlx=3;
+				}
+				
+				//获取奖券后，将该奖券设置为已抽奖
+				dao.updateyhqxxNotUsed(yhqbm);
+			}
+		}
+		
+		//生成六位数不重复的随机抽奖编码
+		/*
+		while(true)
+		{
+			zjbm = (int)(Math.random()*900000) +100000;
+			System.out.println(zjbm);
+			int i = 0;
+			while(i < list_zjjl.size())
+			{
+				if(zjbm != Integer.valueOf(list_zjjl.get(i).getZjbm()))
+				{
+					i++;
+				}
+				else
+				{
+					break;
+				}
+			}
+			if(i == list_zjjl.size())
+			{
+				break;
+			}
+		}
+		*/
+		zjbm = (int)(Math.random()*900000) +100000;
+		Zjjl zjjl = new Zjjl();
+		zjjl.setZjsj(new Date());
+		zjjl.setUserid(userid);
+		zjjl.setXmid(Integer.parseInt(xmid));
+		zjjl.setZjlx(String.valueOf(zjlx));
+		zjjl.setYhqbm(yhqbm);
+		zjjl.setZjbm(String.valueOf(zjbm));
+		zjjl.setYhqmm(String.valueOf(yhqmm));
+		zjjl.setJzsj(enddate);
+		zjjl.setTel(phoneNumber);
+		dao.save(zjjl);
+		/*
+		if(zjlx != 0)
+		{
+			//抽奖成功后奖品份数减1
+			dao.updateFenshuByXmid(zjjl.getXmid());
+		}
+		*/
+		//将中奖结果和中奖备注返回给用户
+		this.showjsondata(String.valueOf(zjlx).concat(String.valueOf(zjbm)).concat(String.valueOf(yhqbm)));
+		return null;
+	}
+}

@@ -1,0 +1,148 @@
+package com.xyt.action;
+
+import javax.annotation.Resource;
+
+import net.sf.json.JSONObject;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.xxcb.util.BaseAction;
+import com.xyt.dao.XytUserInfoDao;
+import com.xyt.po.XytUserInfo;
+import com.xyt.util.StringUtil;
+
+@Scope("prototype")
+@Component("RegisterAction")
+public class RegisterAction extends BaseAction {
+
+	private static final long serialVersionUID = -6934322419970391860L;
+	
+	private XytUserInfo xytUserInfo;
+	private String openId;
+	private String redirectUrl;
+	
+	
+	@Resource
+	private XytUserInfoDao xytUserInfoDao;
+	
+	public String showRegister() {
+		
+		if(StringUtils.isEmpty(openId)) {
+			getRequest().setAttribute("errorMsg", "微信身份ID不存在！");
+			return "error";
+		}
+		
+		xytUserInfo = xytUserInfoDao.getXytUserInfoByOpenId(openId);
+		if(xytUserInfo == null) {
+			getRequest().setAttribute("errorMsg", "用户不存在！");
+			return "error";
+		}
+		
+		return "showRegister";
+	}
+	
+	
+	public String register() {
+		
+		JSONObject json = new JSONObject();
+		String name = xytUserInfo.getName();
+		String telNumber = xytUserInfo.getTelNumber();
+		String verifyCode = getRequest().getParameter("verifyCode");
+		
+		if(StringUtils.isEmpty(name)) {
+			json.put("content", "请填写您的姓名！");
+			json.put("result", "error");
+			showjsondata(json.toString());
+			return null;
+		}
+		
+		if(StringUtils.isEmpty(telNumber)) {
+			json.put("content", "请填写您的手机号码！");
+			json.put("result", "error");
+			showjsondata(json.toString());
+			return null;
+		}
+		
+		if(!StringUtil.isMobileNO(telNumber)) {
+			json.put("content", "请填写有效的手机号码！");
+			json.put("result", "error");
+			showjsondata(json.toString());
+			return null;
+		}
+		
+		if(StringUtils.isEmpty(verifyCode)) {
+			json.put("content", "请填写验证码！");
+			json.put("result", "error");
+			showjsondata(json.toString());
+			return null;
+		}
+		
+		if(!verifyCode.equalsIgnoreCase((String)getSession().getAttribute("verifyCode"))) {
+			json.put("content", "验证码错误！");
+			json.put("result", "error");
+			showjsondata(json.toString());
+			return null;
+		}else {
+			getSession().setAttribute("verifyCode", "");
+		}
+		
+		if(StringUtils.isEmpty(xytUserInfo.getOpenid())) {
+			json.put("content", "微信身份ID不存在！");
+			json.put("result", "error");
+			showjsondata(json.toString());
+			return null;
+		}
+		
+		XytUserInfo pXytUserInfo = xytUserInfoDao.getXytUserInfoByOpenId(xytUserInfo.getOpenid());
+		if(pXytUserInfo == null) {
+			json.put("content", "用户不存在！");
+			json.put("result", "error");
+			showjsondata(json.toString());
+			return null;
+		}
+		
+		pXytUserInfo.setName(name);
+		pXytUserInfo.setTelNumber(telNumber);
+		xytUserInfoDao.update(pXytUserInfo);
+		
+		json.put("content", "提交成功！");
+		json.put("result", "success");
+		showjsondata(json.toString());
+		return null;
+	}
+	
+
+	public XytUserInfo getXytUserInfo() {
+		return xytUserInfo;
+	}
+
+	public void setXytUserInfo(XytUserInfo xytUserInfo) {
+		this.xytUserInfo = xytUserInfo;
+	}
+
+
+	public String getOpenId() {
+		return openId;
+	}
+
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
+
+	public String getRedirectUrl() {
+		return redirectUrl;
+	}
+
+
+	public void setRedirectUrl(String redirectUrl) {
+		this.redirectUrl = redirectUrl;
+	}
+
+	
+
+}

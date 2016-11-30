@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+  
+     <package name="com.xxcb.action" namespace="/cj" extends="struts-default">
+   		<action name="Cjaction" class="Cjaction" >
+   		</action>
+    </package>
+    
+    <package name="com.dxj.action" namespace="/dxj" extends="struts-default">
+   		<action name="DxjTravelRouteAction" class="DxjTravelRouteAction" >
+   			<result name="totaltravelroute">/pages/xytpages/travel/totaltravel.jsp</result>
+   			<result name="choosetravelroute">/pages/xytpages/travel/choosetravelroute.jsp</result>
+   			<result name="travelroute">/pages/xytpages/travel/travelroute.jsp</result>
+   		</action>
+   		
+   		<action name="DxjTravelRouteOrderAction" class="DxjTravelRouteOrderAction" >
+   		</action>
+   		
+   		<action name="DxjNotifyFromWxAction" class="DxjNotifyFromWxAction" >
+   		</action>
+   		
+   		<action name="DxjSuperStarAction" class="DxjSuperStarAction" >
+   			<result name="totalsuperstar">/pages/xytpages/dxjstar/totalsuperstar.jsp</result>
+   			<result name="superstar">/pages/xytpages/dxjstar/superstar.jsp</result>
+   		</action>
+   		
+    </package>
+    
+    <package name="com.xyt.action" namespace="/xyt" extends="struts-default">
+   	
+   		<action name="XytCourseAction" class="XytCourseAction" >
+   			<result name="totalcourse">/pages/xytpages/cources/totalcourse.jsp</result>
+   			<result name="course">/pages/xytpages/cources/course.jsp</result>
+   		</action>
+   		<action name="register" class="RegisterAction" >
+   			<result name="showRegister">/pages/xytpages/register/showRegister.jsp</result>
+    		<result name="error">/pages/xytpages/register/error.jsp</result>
+   		</action>
+   		<action name="pmessage" class="PmessageAction" >
+   			<result name="showSendPmessage">/pages/xytpages/pmessage/showSendPmessage.jsp</result>
+   			<result name="showMyPmessage">/pages/xytpages/pmessage/showMyPmessage.jsp</result>
+    		<result name="error">/pages/xytpages/register/error.jsp</result>
+   		</action>
+   		<action name="userAttantion" class="UserAttantionAction" >
+   			<result name="showMyFriends">/pages/xytpages/attantion/showMyFriends.jsp</result>
+   			<result name="showMyFans">/pages/xytpages/attantion/showMyFans.jsp</result>
+    		<result name="error">/pages/xytpages/register/error.jsp</result>
+   		</action>
+   		<action name="XytMessageAction" class="XytMessageAction" >
+   		</action>
+   		<action name="XytOrderAction" class="XytOrderAction" >
+   			<result name="mycourse">/pages/xytpages/cources/mycourse.jsp</result>
+   		</action>
+   		<action name="userInfo" class="XytUserInfoAction" >
+   			<result name="showMyHome">/pages/xytpages/home/showMyHome.jsp</result>
+   			<result name="showHisHome">/pages/xytpages/home/showHisHome.jsp</result>
+    		<result name="error">/pages/xytpages/register/error.jsp</result>
+   		</action>
+   		<action name="XytGroupOrderAction" class="XytGroupOrderAction" >
+   			<result name="groupInProceed">/pages/xytpages/group/totalgroup.jsp</result>
+   			<result name="group">/pages/xytpages/group/group.jsp</result>
+   			<result name="mygroup">/pages/xytpages/group/mygroup.jsp</result>
+   			<result name="createGroup">/pages/xytpages/group/creategroup.jsp</result>
+   		</action>
+   		<action name="XytTercherInfoAction" class="XytTercherInfoAction" >
+   		</action>
+   		
+   		<action name="XytScoreInfoAction" class="XytScoreInfoAction" >
+   			<result name="myscorerecord">/pages/xytpages/score/myscorerecord.jsp</result>
+   		</action>
+   		
+   		<action name="XytNotifyFromWxAction" class="XytNotifyFromWxAction" >
+   		</action>
+   		<action name="XytCollegeAction" class="XytCollegeAction" >
+   			<result name="mycampus">/pages/xytpages/mycampus/mycampus.jsp</result>
+   			<result name="choosecampus">/pages/xytpages/mycampus/choosecampus.jsp</result>
+   		</action>
+    </package>
+    
+</struts>

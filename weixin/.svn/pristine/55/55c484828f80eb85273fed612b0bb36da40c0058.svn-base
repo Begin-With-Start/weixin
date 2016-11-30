@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    	<!-- 指定连接数据库的驱动 -->
+	    <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		 <!--指定连接数据库的URL 222.240.171.100:10531    10.10.50.11:10528      -->
+		<property name="connection.url">jdbc:oracle:thin:@222.240.171.100:10531:kfcsdw</property>
+		<!-- 指定连接数据库的用户名 -->
+	<property name="connection.username">dwmainu</property>
+		<!-- 指定连接数据库的密码 -->
+		<property name="connection.password">TESTDWMAINU911</property>
+		<property name="jdbc.batch_size ">20</property>
+		<property name="c3p0.idleConnectionTestPeriod">50</property>   		
+
+  		<property name="c3p0.validate">true</property>
+
+		<property name="c3p0.max_size">50</property>
+		  
+	 	<property name="c3p0.min_size">10</property>
+	
+	  	<property name="c3p0.timeout">90</property>
+	
+	  	<property name="preferredTestQuery">select rid from func_addrhd where rid=1</property>
+
+	  	<property name="c3p0.max_statements">0</property>
+	
+	  	<property name="c3p0.idle_test_period">120</property>
+
+	  	<property name="c3p0.acquire_increment">1</property>
+
+	  	<property name="c3p0.idleConnectionTestPeriod">18000</property>
+	
+		<property name="hibernate.c3p0.maxIdleTime">25000</property>
+		
+		<property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+		  
+		<!-- <property name="hbm2ddl.auto">update</property> -->
+		
+		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="show_sql">true</property>
+		<mapping class="com.xxcb.po.Cjxm"/>
+		<mapping class="com.xxcb.po.Zjjl"/>
+		<mapping class="com.xxcb.po.Yhqxx"/>
+		<mapping class="com.xxcb.po.UserInfo"/>
+		<mapping class="com.xxcb.po.AccessToken"/>
+		<mapping class="com.xxcb.po.Button1"/>
+		<mapping class="com.xxcb.po.Button2"/>
+		<mapping class="com.xxcb.po.Button3"/>
+		<mapping class="com.xxcb.po.Button4"/>
+		<mapping class="com.xxcb.po.KeyMaterialMap"/>
+		<mapping class="com.xxcb.po.Order"/>
+		<mapping class="com.xxcb.po.FootbathRecord"/>
+		<mapping class="com.xxcb.po.Qgxm"/>
+		<mapping class="com.xxcb.po.Qgjl"/>
+		<mapping class="com.xxcb.po.ScoreCode"/>
+		<mapping class="com.xxcb.po.InvitationRecord"/>
+		<mapping class="com.xxcb.po.Jfdh"/>
+		<mapping class="com.xxcb.po.Jfdhjl"/>
+		<mapping class="com.xxcb.po.Ywhz"/>
+		
+		<mapping class="com.xyt.po.XytCollege"/>
+		<mapping class="com.xyt.po.XytCourse"/>
+		<mapping class="com.xyt.po.XytMessage"/>
+		<mapping class="com.xyt.po.XytOrder"/>
+		<mapping class="com.xyt.po.XytTercherInfo"/>
+		<mapping class="com.xyt.po.XytUserInfo"/>
+		<mapping class="com.xyt.po.XytAccessToken"/>
+		<mapping class="com.xyt.po.XytLikePointForCourse"/>
+		<mapping class="com.xyt.po.XytGroupOrder"/>
+		<mapping class="com.xyt.po.XytUserInGroup"/>
+		<mapping class="com.xyt.po.Pmessage"/>
+		<mapping class="com.xyt.po.UserAttantion"/>
+		<mapping class="com.xyt.po.XytPayRecord"/>
+</session-factory>
+</hibernate-configuration>

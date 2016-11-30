@@ -1,0 +1,81 @@
+package com.xyt.dao;
+
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.xxcb.util.GenericHibernateDao;
+import com.xyt.po.XytCourse;
+
+@Transactional
+@Component("XytCourseDao")
+public class XytCourseDao extends GenericHibernateDao{
+	/**
+	 * 根据button查找课程信息
+	 * @param button
+	 * @return XytCourse
+	 * @author lidu
+	 * @date 2016.7.8
+	 */
+	@SuppressWarnings("unchecked")
+	public List<XytCourse> getXytCourseByButton(String button)
+	{
+		return this.findBySql(" from XytCourse where button = '"+button+"' order by rid desc", false);
+	}
+	
+	/**
+	 * 根据课程编码查找对应的课程
+	 */
+	@SuppressWarnings("unchecked")
+	public List<XytCourse> getXytCourseByCourseCode(String courseCode)
+	{
+		return this.findBySql(" from XytCourse where courseCode = '"+courseCode+"' order by rid desc", false);
+	}
+	
+	
+	/**
+	 * 根据rid查找课程信息
+	 */
+	@SuppressWarnings("unchecked")
+	public List<XytCourse> getXytCourseByRid(Integer rid)
+	{
+		return this.findBySql(" from XytCourse where rid="+rid+" order by rid desc", false);
+	}
+	
+	/**
+	 * 获取所有的课程信息
+	 */
+	@SuppressWarnings("unchecked")
+	public List<XytCourse> getAllCourse()
+	{
+		return this.findBySql(" from XytCourse order by rid desc", false);
+	}
+	
+	/**
+	 * 点赞
+	 */
+	public boolean addLikePoint(Integer rid)
+	{
+		String sql ="update XytCourse set likePointNumber = likePointNumber + 1 where rid = " + rid;
+		return this.executeSQL(sql, false);
+	}
+	
+	/**
+	 * 添加报名人数
+	 */
+	public boolean addAppliedNumber(Integer rid)
+	{
+		String sql ="update XytCourse set totalAppliedNumber = totalAppliedNumber + 1 where rid = " + rid;
+		return this.executeSQL(sql, false);
+	}
+
+	/**
+	 * 添加试听人数
+	 */
+	public boolean addAuditionNumber(Integer rid)
+	{
+		String sql ="update XytCourse set auditionNumber = auditionNumber + 1 where rid = " + rid;
+		return this.executeSQL(sql, false);
+	}
+}
